@@ -11,8 +11,11 @@ class Sensor {
     void openWindow();
     void closeWindow();
     bool isWindowOpen();
+	bool isRaining();
+	int getTemperature();
+	bool isDay();
 
-    void setConditionstoSimulate(int led, int light, int rain, int temp);
+    void setConditionstoSimulate(int led, int rain, int temp,  int light);
     
   private:
 	int LED;
