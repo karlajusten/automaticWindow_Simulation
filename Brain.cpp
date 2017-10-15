@@ -8,47 +8,48 @@ Brain::~Brain() {}
 
 void Brain::test(){
 
-	/* Set led on and off five times. 
-	And check if window is closed*/
-	for (int x=0; x<5; x++){
-		sensor.setConditionstoSimulate(0, 0, 25, 1);
+	update();
+	act();
+}
 
-		sensor.openWindow();
-		if (sensor.isWindowOpen())
-		  std::cout << "Open Window!" << std::endl;
-		else
-		  std::cout << "Close Window!" << std::endl;
+void Brain::update(){
 
-		sensor.closeWindow();
-		if (sensor.isWindowOpen())
-		  std::cout << "Open Window!" << std::endl;
-		else
-		  std::cout << "Close Window!" << std::endl;	
+	rain = sensor.isRaining();
+	day = sensor.isDay();
+	temperatureNow = sensor.getTemperature();
+	automaticOn = isAutomatic();
+}
 
-		if (sensor.isRaining())
-		  std::cout << "Raining!" << std::endl;
-		else
-		  std::cout << "Not Raining!" << std::endl;
+void Brain::act(){
 
-		std::cout << "Temperature: " << sensor.getTemperature() << "C"<< std::endl;
-
-		if (sensor.isDay())
-		  std::cout << "It's Day!" << std::endl;
-		else
-		  std::cout << "It's Night!" << std::endl;
-
-		sensor.setConditionstoSimulate(0, 1, 10, 0);
-		if (sensor.isRaining())
-		  std::cout << "Raining!" << std::endl;
-		else
-		  std::cout << "Not Raining!" << std::endl;
-
-		std::cout << "Temperature: " << sensor.getTemperature() << "C"<< std::endl;
-
-		if (sensor.isDay())
-		  std::cout << "It's Day!" << std::endl;
-		else
-		  std::cout << "It's Night!" << std::endl;
-
+	if(automaticOn){
+		if(sensor.isWindowOpen()){ 	//Window is open?
+			if((rain) || (config.getMinTemp() > temperatureNow)){
+			sensor.closeWindow();
+			std::cout << "Close the window!" << std::endl;
+			}
+		}else{				//Window is closed.
+			if(config.getMaxTemp() < temperatureNow){
+			sensor.openWindow();
+			std::cout << "Open the window!" << std::endl;
+			}
+		}
 	}
+
+}
+
+bool Brain::isAutomatic(){
+
+	if(day){		//is it day?
+		if(config.isAutomaticDay()){// Automatic on day is on?
+			return true;//It's on automatic mode
+			}
+			return false;//It's on manual mode
+	}else{			//it's night.
+		if(config.isAutomaticNight()){//Automatic on night is on?
+			return true;//It's on automatic mode
+			}
+			return false;//It's on manual mode
+	}
+
 }
