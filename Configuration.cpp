@@ -29,16 +29,16 @@ void Configuration::setMinTemp(int temp){
 }
 
 bool Configuration::isAutomaticDay(){
-	return isAutomaticDay;
+	return isAutDay;
 }
 
 void Configuration::setAutomaticDay(bool aut){
-	isAutomaticDay = aut;
+	isAutDay = aut;
 }
 
 bool Configuration::isAutomaticNight(){
-	return isAutomaticNight;
+	return isAutNight;
 }
 void Configuration::setAutomaticNight(bool aut){
-	isAutomaticNight = aut;
+	isAutNight = aut;
 }

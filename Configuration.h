@@ -18,8 +18,8 @@ class Configuration {
   private:
 	int tempMax;
 	int tempMin;
-	bool isAutomaticDay;
-	bool isAutomaticNight;
+	bool isAutDay;
+	bool isAutNight;
 	
 
 };
