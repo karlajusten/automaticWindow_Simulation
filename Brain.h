@@ -2,6 +2,7 @@
 #define BRAIN_H
 
 #include "Sensor.h"
+#include "Configuration.h"
 
 class Brain {
   public:
@@ -11,6 +12,7 @@ class Brain {
 
   private:
     Sensor sensor;  
+	Configuration config;
 
 };
 #endif /* BRAIN_H */
