@@ -24,18 +24,10 @@
 
 TEST(Example,AutomaticWindow) {
 
-
-
-	/*
-		Como pretendes fazer:	
-			1 - acessar os dados dos sensores através do objeto Brain, precisando replicar alguns métodos dos sensores no brain, para conseguirmos acessar pelo objeto brain algumas informações;
-			2 - criar um objeto Sensor e enviá-lo via construtor do Brain, assim será trabalhado com o mesmo objeto sensor.		
-
-	**/
-
-	Brain brain;
 	Sensor sensor;
 	Configuration config;
+	Brain brain;
+	
 
 	sensor.setConditionstoSimulate(1, 0, 20, 1); // led, chuva, temperatura, luz
 	config.setAutomaticDay(true);
@@ -44,7 +36,7 @@ TEST(Example,AutomaticWindow) {
 	config.setMaxTemp(24);
 	sensor.openWindow();
 	//chamar o método do brain que irá fazer o processamento de automatização
-	brain.check();
+	brain.test();
 	EXPECT_EQ(true, sensor.isOpen());
 }
 
